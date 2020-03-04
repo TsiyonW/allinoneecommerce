@@ -1,0 +1,18 @@
+{
+  "name": "AllInOneEcommerce",
+  "version": "1.0.0",
+  "description": "A bot which have functionalities like searching an item and returning the results, add items to cart, redirect to order page,  and view item details from multiple authorized e-commerce sites.",
+  "main": "index.js",
+  "repository": "https://github.com/TsiyonW/allinoneecommerce.git",
+  "author": "Tsiyon & Oromia",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.10.1",
+    "graphql": "^14.6.0",
+    "knex": "^0.20.10",
+    "lodash": "^4.17.15",
+    "objection": "^2.1.3",
+    "pg": "^7.18.2",
+    "typescript": "^3.8.2"
+  }
+}
