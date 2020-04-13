@@ -1,0 +1,15 @@
+type User{
+    id:ID!
+    phoneNo:String!
+}
+type Query{
+    user:User!
+    users:[User]!
+}
+input NewUserInput{
+    phoneNo:String!
+}
+type Mutation{
+    register(input:NewUserInput):User!
+    removeUser(id:ID!):User
+}

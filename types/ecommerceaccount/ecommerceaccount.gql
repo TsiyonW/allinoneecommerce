@@ -1,0 +1,34 @@
+type EcommerceAccount{
+    id: ID!
+    email:String!
+    username:String!
+    site:String!
+    password:String!
+    user_id:Int!
+}
+
+input NewAccountInput{
+    email:String!
+    username:String!
+    site:String!
+    password:String!
+    user_id:Int!
+}
+
+input UpdateAccountInput{
+    email:String
+    username:String
+    password:String
+}
+
+type Query{
+    account:EcommerceAccount!
+    accounts:[EcommerceAccount]!
+    mySites(user_id:ID!):EcommerceAccount!
+
+}
+
+type Mutation{
+    addAccount(input: NewAccountInput!):EcommerceAccount!
+    updateAccount(input: UpdateAccountInput!):EcommerceAccount!
+}
