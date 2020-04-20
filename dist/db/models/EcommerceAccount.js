@@ -12,6 +12,47 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Model = require('objection').Model;
+var knex = require("../config/knex");
+Model.knex(knex);
+var EcommerceAccountDB;
+(function (EcommerceAccountDB) {
+    var EcommerceAccount = /** @class */ (function (_super) {
+        __extends(EcommerceAccount, _super);
+        function EcommerceAccount() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(EcommerceAccount, "tableName", {
+            get: function () {
+                return 'ecommerceaccounts';
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EcommerceAccount, "relationMappings", {
+            get: function () {
+                var User = require('./User');
+                return {
+                    user: {
+                        relation: Model.BelongsToOneRelation,
+                        modelClass: User,
+                        join: {
+                            from: 'ecommerceaccounts.user_id',
+                            to: 'users.id'
+                        }
+                    }
+                };
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return EcommerceAccount;
+    }(Model));
+    EcommerceAccountDB.EcommerceAccount = EcommerceAccount;
+})(EcommerceAccountDB = exports.EcommerceAccountDB || (exports.EcommerceAccountDB = {}));
+=======
 var Model = require('objection').Model;
 var knex = require("../config/knex");
 Model.knex(knex);

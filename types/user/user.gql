@@ -3,6 +3,9 @@ type User{
     phoneNo:String!
 }
 type Query{
+    users:[User]!
+    userByPhoneNo:User!
+=======
     user:User!
     users:[User]!
 }

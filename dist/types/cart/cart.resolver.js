@@ -36,49 +36,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var User_1 = require("../../db/models/User");
-//get all users
-var users = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
-    var users;
+var Cart_1 = require("../../db/models/Cart");
+// return all the items in the cart
+exports.myCart = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+    var cartItems;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query()];
+            case 0: return [4 /*yield*/, Cart_1.CartDB.Cart.query()
+                    .where('user_id', '=', ctx.user.id)];
             case 1:
-                users = _a.sent();
-                return [2 /*return*/, users];
+                cartItems = _a.sent();
+                return [2 /*return*/, cartItems];
         }
     });
 }); };
-// get user by phone number
-var userByPhoneNo = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
+//get specific item in the cart using id
+exports.cart = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+    var cartItem;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().where('phoneNo', '=', args.phoneNo)];
+            case 0: return [4 /*yield*/, Cart_1.CartDB.Cart.query().findById(args.id)];
             case 1:
-                user = _a.sent();
-                return [2 /*return*/, user];
+                cartItem = _a.sent();
+                return [2 /*return*/, cartItem];
         }
     });
 }); };
-var register = function () { return __awaiter(void 0, void 0, void 0, function () {
+var addToCart = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         return [2 /*return*/];
     });
 }); };
-var removeUser = function () { return __awaiter(void 0, void 0, void 0, function () {
+var removeFromCart = function () { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/];
+    });
+}); };
+var emptyCart = function () { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/];
+    });
+}); };
+var updateCart = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         return [2 /*return*/];
     });
 }); };
 exports.default = {
     Query: {
-        users: users,
-        userByPhoneNo: userByPhoneNo
+        myCart: exports.myCart,
+        cart: exports.cart
     },
     Mutation: {
-        register: register,
-        removeUser: removeUser
+        addToCart: addToCart,
+        removeFromCart: removeFromCart,
+        emptyCart: emptyCart,
+        updateCart: updateCart
     }
 };
-=======

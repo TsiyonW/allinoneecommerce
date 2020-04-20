@@ -1,0 +1,39 @@
+type Cart{
+    id:ID!
+    user_id:ID!
+    site:String!
+    item:String!
+    image:Image
+    unitPrice:Float!
+    description:String!
+    quantity:Integer!
+    measurementUnit:String!
+
+}
+type newCartItemInput{
+    user_id:ID!
+    site:String!
+    item:String!
+    image:Image
+    unitPrice:Float!
+    description:String!
+    quantity:Integer!
+    measurementUnit:String!
+}
+
+type updateCartInput{
+    quantity:Integer!
+}
+
+type Query{
+    myCart:[Cart]
+
+}
+
+type Mutation{
+    addToCart(input:newCartItemInput!):Cart!
+    removeFromCart(id:ID!):Cart
+    emptyCart(user_id:ID!):[Cart]
+    updateCart(id:ID!, input:updateCartInput):Cart!
+
+}
