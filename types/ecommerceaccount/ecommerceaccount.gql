@@ -1,4 +1,6 @@
+
 export const ecommerceSchema = `
+=======
 type EcommerceAccount{
     id: ID!
     email:String!
@@ -33,3 +35,14 @@ type Mutation{
     updateAccount(id:ID!, input: UpdateAccountInput!):EcommerceAccount!
     deleteAccount(id:ID!):EcommerceAccount
 }`
+=======
+    account:EcommerceAccount!
+    accounts:[EcommerceAccount]!
+    mySites(user_id:ID!):EcommerceAccount!
+
+}
+
+type Mutation{
+    addAccount(input: NewAccountInput!):EcommerceAccount!
+    updateAccount(input: UpdateAccountInput!):EcommerceAccount!
+}
