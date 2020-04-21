@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.149",
     "apollo-server": "^2.10.1",
+    "apollo-server-express": "^2.10.1",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
