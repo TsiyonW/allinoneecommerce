@@ -24,15 +24,15 @@ app.use(bodyParser.json());
 
   server.applyMiddleware({app})
 
-  app.listen({port:3000}, function(){
-    console.log(`Server ready at http://localhost:3000${server.graphqlPath}`)
+  app.listen({port:8000}, function(){
+    console.log(`Server ready at http://localhost:8000${server.graphqlPath}`)
   });
   
-  app.post('/' + bot.token, function (req, res) {
-    console.log(bot.token)
-    bot.processUpdate(req.body);
-    res.sendStatus(200);
-  });
+  // app.post('/' + bot.token, function (req, res) {
+  //  // console.log(bot.token)
+  //   bot.processUpdate(req.body);
+  //   res.sendStatus(200);
+  // });
 
 })()
 
