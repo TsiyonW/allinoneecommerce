@@ -5,9 +5,6 @@ type User{
 type Query{
     users:[User]!
     userByPhoneNo:User!
-=======
-    user:User!
-    users:[User]!
 }
 input NewUserInput{
     phoneNo:String!

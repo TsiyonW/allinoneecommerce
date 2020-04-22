@@ -1,5 +1,4 @@
 "use strict";
-
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40,10 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { allUsers } from './types/user/user.resolver'
 var apollo_server_1 = require("apollo-server");
 var schema_1 = require("./utils/schema");
-// import { ecommerceAccountSchema } from './types/ecommerceaccount/ecommerceaccountSchema'
 var user_resolver_1 = __importDefault(require("./types/user/user.resolver"));
 var ecommerceaccount_resolver_1 = __importDefault(require("./types/ecommerceaccount/ecommerceaccount.resolver"));
 var cart_resolver_1 = __importDefault(require("./types/cart/cart.resolver"));
@@ -57,7 +54,7 @@ var lodash_1 = require("lodash");
                     typeDefs: schema_1.schemas,
                     resolvers: lodash_1.merge({}, user_resolver_1.default, cart_resolver_1.default, ecommerceaccount_resolver_1.default)
                 });
-                return [4 /*yield*/, server.listen({ port: 3000 })];
+                return [4 /*yield*/, server.listen({ port: 8000 })];
             case 1:
                 url = (_a.sent()).url;
                 console.log("server ready at " + url);
@@ -65,5 +62,3 @@ var lodash_1 = require("lodash");
         }
     });
 }); })();
-=======
-

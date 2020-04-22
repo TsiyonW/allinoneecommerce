@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -42,11 +53,12 @@ var accounts = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0
     var accounts;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query()];
+            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().where('user_id', '=', ctx.user.id)
+                // console.log(accounts);
+            ];
             case 1:
                 accounts = _a.sent();
-                // .where('user_id','=',ctx.user.id)
-                console.log(accounts);
+                // console.log(accounts);
                 return [2 /*return*/, accounts];
         }
     });
@@ -68,27 +80,38 @@ var accountBySite = function (_, args, ctx) { return __awaiter(void 0, void 0, v
     var account;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query()
-                    .where('user_id', '=', ctx.user.id)];
+            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().where('user_id', '=', ctx.user.id)];
             case 1:
                 account = _a.sent();
                 return [2 /*return*/, account];
         }
     });
 }); };
-var addAccount = function () { return __awaiter(void 0, void 0, void 0, function () {
+// adds new account
+var addAccount = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().insert(__assign(__assign({}, args.input), { user_id: ctx.user.id }))];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
     });
 }); };
-var updateAccount = function () { return __awaiter(void 0, void 0, void 0, function () {
+// updates account's parameters like password change
+var updateAccount = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().patchAndFetchById(args.id, args.input)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
     });
 }); };
-var deleteAccount = function () { return __awaiter(void 0, void 0, void 0, function () {
+// delete account
+var deleteAccount = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().deleteById(args.id)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
     });
 }); };
 exports.default = {
@@ -103,4 +126,3 @@ exports.default = {
         deleteAccount: deleteAccount
     }
 };
-=======

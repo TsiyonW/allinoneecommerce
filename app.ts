@@ -13,7 +13,7 @@ import { merge } from 'lodash'
     
   })
 
-const {url} = await server.listen({port:3000})
+const {url} = await server.listen({port:8000})
 console.log(`server ready at ${url}`)
 
 })()
