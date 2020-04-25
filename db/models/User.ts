@@ -1,4 +1,4 @@
-import { CartDB } from "./Cart";
+import { SavedItemDB } from "./SavedItem";
 
 const { Model } = require('objection')
 const knex = require("../config/knex")
@@ -10,23 +10,14 @@ export module UserDB{
             return 'users';
         }
         static get relationMappings(){
-            const EcommerceAccount = require('./EcommerceAccount')
-            const Cart = require('./Cart')
+            const SavedItem = require('./SavedItem')
             return {
-                ecommerceAccount:{
+                saveditem:{
                     relation: Model.HasManyRelation,
-                    modelClass: EcommerceAccount,
-                    join:{
-                        from: 'users.id',
-                        to: 'ecommerceaccounts.user_id'
-                    }
-                },
-                cart:{
-                    relation: Model.HasManyRelation,
-                    modelClass: Cart,
+                    modelClass: SavedItem,
                     join:{
                         from:'users.id',
-                        to:'cart.user_id'
+                        to:'saveditems.user_id'
                     }
                 }
             }

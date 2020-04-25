@@ -61,11 +61,11 @@ var users = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, f
     });
 }); };
 // get user by phone number
-var userByPhoneNo = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+var userBychatId = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     var user;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().where('phoneNo', '=', args.phoneNo)];
+            case 0: return [4 /*yield*/, User_1.UserDB.User.query().where('chatId', '=', args.chatId)];
             case 1:
                 user = _a.sent();
                 return [2 /*return*/, user];
@@ -93,7 +93,7 @@ var removeUser = function (_, args, ctx) { return __awaiter(void 0, void 0, void
 exports.default = {
     Query: {
         users: users,
-        userByPhoneNo: userByPhoneNo
+        userBychatId: userBychatId
     },
     Mutation: {
         register: register,

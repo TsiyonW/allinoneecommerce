@@ -32,23 +32,14 @@ var UserDB;
         });
         Object.defineProperty(User, "relationMappings", {
             get: function () {
-                var EcommerceAccount = require('./EcommerceAccount');
-                var Cart = require('./Cart');
+                var SavedItem = require('./SavedItem');
                 return {
-                    ecommerceAccount: {
+                    saveditem: {
                         relation: Model.HasManyRelation,
-                        modelClass: EcommerceAccount,
+                        modelClass: SavedItem,
                         join: {
                             from: 'users.id',
-                            to: 'ecommerceaccounts.user_id'
-                        }
-                    },
-                    cart: {
-                        relation: Model.HasManyRelation,
-                        modelClass: Cart,
-                        join: {
-                            from: 'users.id',
-                            to: 'cart.user_id'
+                            to: 'saveditems.user_id'
                         }
                     }
                 };

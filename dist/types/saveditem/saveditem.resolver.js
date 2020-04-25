@@ -47,82 +47,60 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var EcommerceAccount_1 = require("../../db/models/EcommerceAccount");
-// get user's accounts
-var accounts = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
-    var accounts;
+var SavedItem_1 = require("../../db/models/SavedItem");
+// return all the items saved by user
+exports.mySavedItems = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().where('user_id', '=', ctx.user.id)
-                // console.log(accounts);
-            ];
-            case 1:
-                accounts = _a.sent();
-                // console.log(accounts);
-                return [2 /*return*/, accounts];
-        }
-    });
-}); };
-// get an account using id
-var accountById = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
-    var account;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().findById(args.id)];
-            case 1:
-                account = _a.sent();
-                return [2 /*return*/, account];
-        }
-    });
-}); };
-// get an account using sitename
-var accountBySite = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
-    var account;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().where('user_id', '=', ctx.user.id)];
-            case 1:
-                account = _a.sent();
-                return [2 /*return*/, account];
-        }
-    });
-}); };
-// adds new account
-var addAccount = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().insert(__assign(__assign({}, args.input), { user_id: ctx.user.id }))];
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().where('user_id', '=', ctx.user.id)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-// updates account's parameters like password change
-var updateAccount = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+//get specific item in the saved using id
+exports.savedItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().patchAndFetchById(args.id, args.input)];
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().findById(args.id)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-// delete account
-var deleteAccount = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+// add item to saved items
+var saveItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, EcommerceAccount_1.EcommerceAccountDB.EcommerceAccount.query().deleteById(args.id)];
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().insert(__assign(__assign({}, args.input), { user_id: ctx.user.id }))];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+// removes item from the saved
+var removeItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().deleteById(args.id)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+// remove all saved items
+var emptySavedItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().delete().where('user_id', '=', args.user_id)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
 exports.default = {
     Query: {
-        accounts: accounts,
-        accountById: accountById,
-        accountBySite: accountBySite
+        mySavedItems: exports.mySavedItems,
+        savedItem: exports.savedItem
     },
     Mutation: {
-        addAccount: addAccount,
-        updateAccount: updateAccount,
-        deleteAccount: deleteAccount
+        saveItem: saveItem,
+        removeItem: removeItem,
+        emptySavedItem: emptySavedItem,
     }
 };

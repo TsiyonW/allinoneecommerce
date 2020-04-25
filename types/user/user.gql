@@ -1,13 +1,13 @@
 type User{
     id:ID!
-    phoneNo:String!
+    chatId:String!
 }
 type Query{
     users:[User]!
-    userByPhoneNo:User!
+    userBychatId:User!
 }
 input NewUserInput{
-    phoneNo:String!
+    chatId:String!
 }
 type Mutation{
     register(input:NewUserInput):User!

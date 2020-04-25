@@ -16,21 +16,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Model = require('objection').Model;
 var knex = require("../config/knex");
 Model.knex(knex);
-var CartDB;
-(function (CartDB) {
-    var Cart = /** @class */ (function (_super) {
-        __extends(Cart, _super);
-        function Cart() {
+var SavedItemDB;
+(function (SavedItemDB) {
+    var SavedItem = /** @class */ (function (_super) {
+        __extends(SavedItem, _super);
+        function SavedItem() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        Object.defineProperty(Cart, "tableName", {
+        Object.defineProperty(SavedItem, "tableName", {
             get: function () {
-                return 'carts';
+                return 'saveditems';
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Cart, "relationMappings", {
+        Object.defineProperty(SavedItem, "relationMappings", {
             get: function () {
                 var User = require('./User');
                 return {
@@ -38,7 +38,7 @@ var CartDB;
                         relation: Model.BelongsToOneRelation,
                         modelClass: User,
                         join: {
-                            from: 'cart.user_id',
+                            from: 'saveditems.user_id',
                             to: 'users.id'
                         }
                     }
@@ -47,7 +47,7 @@ var CartDB;
             enumerable: true,
             configurable: true
         });
-        return Cart;
+        return SavedItem;
     }(Model));
-    CartDB.Cart = Cart;
-})(CartDB = exports.CartDB || (exports.CartDB = {}));
+    SavedItemDB.SavedItem = SavedItem;
+})(SavedItemDB = exports.SavedItemDB || (exports.SavedItemDB = {}));

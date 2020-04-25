@@ -7,8 +7,8 @@ const users = async(_:any, args:any,ctx:any)=>{
 }
 
 // get user by phone number
-const userByPhoneNo = async(_:any, args:any,ctx:any)=>{
-    const user = await UserDB.User.query().where('phoneNo','=',args.phoneNo);
+const userBychatId = async(_:any, args:any,ctx:any)=>{
+    const user = await UserDB.User.query().where('chatId','=',args.chatId);
     return user;
 }
 
@@ -26,7 +26,7 @@ const removeUser = async(_:any, args:any,ctx:any)=>{
 export default {
     Query: {
       users,
-      userByPhoneNo
+      userBychatId
     },
     Mutation: {
       register,

@@ -74,7 +74,7 @@ var BotService = /** @class */ (function () {
                 text = 'search clicked';
             }
             else if (action === 'add_account') {
-                text = 'add account clicked';
+                text = 'add ecommerce account clicked';
             }
             exports.bot.sendMessage(opts.chat_id, text);
         });

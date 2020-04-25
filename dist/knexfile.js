@@ -9,10 +9,7 @@ module.exports = {
             database: 'allinone'
         },
         migrations: {
-            directory: __dirname + '../../migrations'
-        },
-        seeds: {
-            directory: __dirname + '../../seeds'
+            directory: __dirname + './migrations'
         }
     },
     staging: {

@@ -3,10 +3,10 @@ const knex = require("../config/knex")
 Model.knex(knex)
 
 
-export module CartDB{
-    export class Cart extends Model{
+export module SavedItemDB{
+    export class SavedItem extends Model{
         static get tableName(){
-            return 'carts';
+            return 'saveditems';
         }
 
         static get relationMappings(){
@@ -16,7 +16,7 @@ export module CartDB{
                     relation:Model.BelongsToOneRelation,
                     modelClass:User,
                     join:{
-                        from:'cart.user_id',
+                        from:'saveditems.user_id',
                         to:'users.id'
                     }
                 }

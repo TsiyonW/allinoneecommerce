@@ -43,8 +43,7 @@ var apollo_server_express_1 = require("apollo-server-express");
 var express_1 = __importDefault(require("express"));
 var schema_1 = require("./utils/schema");
 var user_resolver_1 = __importDefault(require("./types/user/user.resolver"));
-var ecommerceaccount_resolver_1 = __importDefault(require("./types/ecommerceaccount/ecommerceaccount.resolver"));
-var cart_resolver_1 = __importDefault(require("./types/cart/cart.resolver"));
+var saveditem_resolver_1 = __importDefault(require("./types/saveditem/saveditem.resolver"));
 var lodash_1 = require("lodash");
 var common_1 = require("./utils/common");
 require('dotenv').config();
@@ -59,7 +58,7 @@ app.use(bodyParser.json());
         common_1.BotService.startBot();
         server = new apollo_server_express_1.ApolloServer({
             typeDefs: schema_1.schemas,
-            resolvers: lodash_1.merge({}, user_resolver_1.default, cart_resolver_1.default, ecommerceaccount_resolver_1.default)
+            resolvers: lodash_1.merge({}, user_resolver_1.default, saveditem_resolver_1.default)
         });
         server.applyMiddleware({ app: app });
         app.listen({ port: 8000 }, function () {
