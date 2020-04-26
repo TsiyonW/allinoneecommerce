@@ -22,7 +22,7 @@ export const schemas = `
 
 }
 
-type newItemInput{
+input newItemInput{
     user_id:ID!
     item:String!
     description:String
