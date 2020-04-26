@@ -11,5 +11,5 @@ input NewUserInput{
 }
 type Mutation{
     register(input:NewUserInput):User!
-    removeUser(id:ID!):User
+    removeUser(chatId:String!):User
 }
