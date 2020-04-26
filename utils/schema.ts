@@ -36,7 +36,7 @@ input newItemInput{
 
   type Query{
     users:[User]!
-    userBychatId:User!
+    userBychatId(chatId:String!):User!
     mySavedItems(chatId:String!):[SavedItem]!
     savedItem(chatId:String,id:ID!):SavedItem!
     search(item:String!):[SavedItem]

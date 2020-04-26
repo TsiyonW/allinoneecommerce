@@ -8,12 +8,15 @@ const users = async(_:any, args:any,ctx:any)=>{
 
 // get user by phone number
 const userBychatId = async(_:any, args:any,ctx:any)=>{
+  
     const user = await UserDB.User.query().where('chatId','=',args.chatId);
-    return user;
+    
+    return user[0];
 }
 
 // registers user
 const register = async(_:any, args:any,ctx:any)=>{
+  
   return await  UserDB.User.query().insert({...args.input})
 
 }

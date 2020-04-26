@@ -1,4 +1,7 @@
 import { getSearchResults } from './request';
+import { register } from './request';
+import { getUser } from './request';
+import { getItems } from './request'
 
 
 
@@ -24,9 +27,12 @@ export class BotService{
         }
 
         //on start command
-        bot.onText(/\/start/, function (message: any) {
+        bot.onText(/\/start/, async (message: any) => {
 
-            const chatId = message.chat.id;
+            const chatId: string = message.chat.id.toString();
+            let reg_user : any = await register(chatId);
+            console.log("await", reg_user)
+            
             // send a message to the chat 
             bot.sendMessage( chatId, 
                 `👋Welcome, @${message.chat.username} to @all_in_one_ecommerce_bot. \nHere you can 🔎search from multiple sites and save items for later use. 
@@ -51,7 +57,7 @@ export class BotService{
 
           //on '/search' command
           bot.onText(/\/search (.+)/, async (message: any, match: any) => {
-            const chatId = message.chat.id;
+            const chatId = message.chat.id.toString();
             const item = match[1]
             
             console.log(await getSearchResults(item));
@@ -59,14 +65,16 @@ export class BotService{
           });
 
           //on '/saved_items' command
-          bot.onText(/\/saved_items/, function (message: any) {
-            const chatId = message.chat.id;
+          bot.onText(/\/saved_items/, async (message: any) => {
+            const chatId = message.chat.id.toString();
+            const items: any = await getItems(chatId);
+            console.log(items.data)
             //get saved items with chat id
           });
 
           // on '/help' command
           bot.onText(/\/help/, function (message: any) {
-            const chatId = message.chat.id;
+            const chatId = message.chat.id.toString();
             //send some message
           });
 
@@ -75,7 +83,7 @@ export class BotService{
             const action = callbackQuery.data;
             const msg = callbackQuery.message;
             const opts = {
-              chat_id: msg.chat.id,
+              chat_id: msg.chat.id.toString(),
               message_id: msg.message_id,
             };
             let text = ".";

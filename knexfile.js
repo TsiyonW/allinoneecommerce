@@ -10,7 +10,7 @@ module.exports = {
       database:'allinone'
     },
     migrations:{
-      directory: __dirname + './migrations'
+      directory: __dirname + '/migrations'
     }
   },
 
