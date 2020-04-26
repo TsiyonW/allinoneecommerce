@@ -9,8 +9,8 @@ export const schemas = `
   }
 
   type SavedItem{
-    id:ID!
-    chatId:String!
+    id:ID
+    chatId:String
     item:String!
     description:String
     unitPrice:String
@@ -22,7 +22,7 @@ export const schemas = `
 
 }
 
-type newItemInput{
+input newItemInput{
     chatId:String!
     item:String!
     description:String
@@ -39,7 +39,7 @@ type newItemInput{
     userBychatId:User!
     mySavedItems(chatId:String!):[SavedItem]!
     savedItem(chatId:String,id:ID!):SavedItem!
-    search(item:String!):SavedItem
+    search(item:String!):[SavedItem]
   }
   type Mutation{
     register(input:NewUserInput):User!

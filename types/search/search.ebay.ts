@@ -1,6 +1,6 @@
 const Ebay = require('ebay-node-api');
 
- export const getDataFromEbay = async(searchField:string, userId:number, limit: number = 5)=>{
+ export const getDataFromEbay = async(searchField:string, limit: number = 5)=>{
   let data: string[] = [];
   try{
       //set client credentials
@@ -26,12 +26,13 @@ const Ebay = require('ebay-node-api');
       
       for(let item of itemSummaries){
           let itemDetails = {} as any;
-          itemDetails.user_id = userId;
+        //   itemDetails.user_id = userId;
           itemDetails.uri = item.itemHref;
           itemDetails.site = "eBay"
           itemDetails.description = item.title;
           itemDetails.unitPrice = `${item.price.value} ${item.price.currency}`;
           itemDetails.image = item.image.imageUrl;
+          itemDetails.item = searchField;
           data.push(itemDetails);
 
       }

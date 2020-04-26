@@ -9,18 +9,29 @@ const search = async(_:any, args:any,ctx:any)=>{
     let timeOut = new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve([{error:'Request time out.'}]);
-        }, 10000)
+        }, 15000)
     })
 
     // wait for the data to be returned with in specified time otherwise timeout
-    let amazonData = await Promise.race([timeOut,getDataFromAmazon(args.item, args.chatId) ])
-    let ebayData = await Promise.race([timeOut,getDataFromEbay(args.item, args.chatId) ])
+    let amazonData: any = await getDataFromAmazon(args.item)
+    let ebayData : any = await getDataFromEbay(args.item) 
 
     // push the results from each site to the results array
-    searchResults.push(amazonData)
-    searchResults.push(ebayData)
+    for(let item in amazonData){
 
+    }
+    loop(amazonData, searchResults);
+    loop(ebayData, searchResults);
+
+    console.log(searchResults)
     return searchResults;
+}
+
+function loop(data: any, target:any){
+    for(let i of data){
+        target.push(i);
+    }
+
 }
 
 export default {

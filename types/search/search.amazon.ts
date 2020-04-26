@@ -2,7 +2,7 @@ const Nightmare = require('nightmare')
 const nightmare = Nightmare({ show: false })
 const cheerio = require('cheerio')
  
- export const getDataFromAmazon = async(searchField:string, chatId:string)=>{
+ export const getDataFromAmazon = async(searchField:string)=>{
     let data: string[] = [];
     let amazonURL = "https://www.amazon.com"
     //get to amazon url and have the elements inside
@@ -23,7 +23,7 @@ const cheerio = require('cheerio')
         let item = cheerio.load(items)
 
         let itemD = {} as any;
-        itemD.chatId = chatId;
+        // itemD.chatId = chatId;
         itemD.uri = amazonURL+item('h2 a.a-text-normal').get(0).attribs.href;
         itemD.site = "Amazon"
         itemD.description = item('a.a-text-normal span.a-text-normal').text().trim();

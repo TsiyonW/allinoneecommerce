@@ -17,9 +17,10 @@ app.use(bodyParser.json());
 ( async()=>{
   BotService.startBot();
   const server = new ApolloServer({
+
     typeDefs: schemas,
     resolvers: merge({}, users, savedItem, search),
-    
+    introspection: true, 
   })
 
   server.applyMiddleware({app})

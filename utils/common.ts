@@ -1,4 +1,6 @@
-import search from '../types/search/search.resolver'
+import { getSearchResults } from './request';
+
+
 
 export let bot: any;
 
@@ -48,10 +50,11 @@ export class BotService{
           });
 
           //on '/search' command
-          bot.onText(/\/search/, function (message: any, match: any) {
+          bot.onText(/\/search (.+)/, async (message: any, match: any) => {
             const chatId = message.chat.id;
             const item = match[1]
-            console.log(item);
+            
+            console.log(await getSearchResults(item));
             
           });
 
