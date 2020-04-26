@@ -40,6 +40,7 @@ type newItemInput{
     userBychatId:User!
     mySavedItems:[SavedItem]!
     savedItem(id:ID!):SavedItem!
+    search(item:String!):SavedItem
   }
   type Mutation{
     register(input:NewUserInput):User!

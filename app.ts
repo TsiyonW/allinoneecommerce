@@ -3,6 +3,7 @@ import express from 'express'
 import { schemas } from './utils/schema'
 import users from './types/user/user.resolver'
 import savedItem from './types/saveditem/saveditem.resolver'
+import search from './types/search/search.resolver'
 import { merge } from 'lodash'
 import { BotService } from './utils/common';
 require('dotenv').config();
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
   BotService.startBot();
   const server = new ApolloServer({
     typeDefs: schemas,
-    resolvers: merge({}, users, savedItem)
+    resolvers: merge({}, users, savedItem, search),
     
   })
 
