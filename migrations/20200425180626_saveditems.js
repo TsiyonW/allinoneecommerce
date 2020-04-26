@@ -9,6 +9,7 @@ exports.up = function(knex) {
         table.string("image")
         table.string("site")
         table.string("rating")
+        table.string("chatId").unsigned()
         table.timestamp("dateCreated").defaultTo(knex.fn.now())
     })
   };
