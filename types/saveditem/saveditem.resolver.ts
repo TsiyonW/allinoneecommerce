@@ -2,7 +2,7 @@ import { SavedItemDB } from '../../db/models/SavedItem'
 
 // return all the items saved by user
 export const mySavedItems = async(_:any, args:any,ctx:any)=>{
-    return await SavedItemDB.SavedItem.query().where('user_id', '=',ctx.user.id)
+    return await SavedItemDB.SavedItem.query().where('chatId', '=',args.chatId)
    
 }
 
@@ -13,7 +13,7 @@ export const savedItem = async(_:any, args:any,ctx:any)=>{
 
 // add item to saved items
 const saveItem = async(_:any, args:any,ctx:any)=>{
-  return await  SavedItemDB.SavedItem.query().insert({...args.input, user_id:ctx.user.id})
+  return await  SavedItemDB.SavedItem.query().insert({...args.input})
 
 }
 // removes item from the saved
@@ -23,7 +23,7 @@ const removeItem = async(_:any, args:any,ctx:any)=>{
 
 // remove all saved items
 const emptySavedItem = async(_:any, args:any,ctx:any)=>{
-  return await SavedItemDB.SavedItem.query().delete().where('user_id', '=',args.user_id)
+  return await SavedItemDB.SavedItem.query().delete().where('chatId', '=',args.chatId)
 }
 
 export default {

@@ -10,7 +10,7 @@ export const schemas = `
 
   type SavedItem{
     id:ID!
-    user_id:ID!
+    chatId:String!
     item:String!
     description:String
     unitPrice:String
@@ -22,8 +22,8 @@ export const schemas = `
 
 }
 
-input newItemInput{
-    user_id:ID!
+type newItemInput{
+    chatId:String!
     item:String!
     description:String
     unitPrice:String
@@ -31,24 +31,22 @@ input newItemInput{
     image:String
     site:String
     rating:String
-    dateCreated:String
 }
 
 
   type Query{
     users:[User]!
     userBychatId:User!
-    mySavedItems:[SavedItem]!
-    savedItem(id:ID!):SavedItem!
+    mySavedItems(chatId:String!):[SavedItem]!
+    savedItem(chatId:String,id:ID!):SavedItem!
     search(item:String!):SavedItem
   }
   type Mutation{
     register(input:NewUserInput):User!
-    removeUser(id:ID!):User
-    saveItem(input:newItemInput!):SavedItem!,
-    removeItem(id:ID!):SavedItem!,
-    emptySavedItem(user_id:ID!):SavedItem!,
-    
+    removeUser(chatId:String!):User
+    saveItem(chatId:String!,input:newItemInput!):SavedItem!,
+    removeItem(chatId:String!,id:ID!):SavedItem!,
+    emptySavedItem(chatId:String!):SavedItem!,
   }
   schema {
     query: Query
