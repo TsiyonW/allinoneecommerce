@@ -26,13 +26,8 @@ const search = async (_: any, args: any, ctx: any) => {
 };
 
 function loop(data: any, target: any) {
-    let i = 0;
-    for (let item of data) {
-        while (i <= 10) {
-            target.push(item);
-            i++;
-        }
-
+    for(let i = 0;i<10; i++){
+        target.push(data[i])
     }
 }
 
