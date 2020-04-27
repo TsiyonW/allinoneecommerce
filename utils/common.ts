@@ -116,17 +116,13 @@ export class BotService {
         console.log(selected);
 
         bot.sendPhoto(chatId, selected.image, {
-          caption: `Item: ${selected.item}\nSite: ${selected.site}\nPrice: ${selected.unitPrice}\nDescription: ${selected.description} `,
+          caption: `Item: ${selected.item}\nSite: ${selected.site}\nPrice: ${selected.unitPrice}\nDescription: ${selected.description} \n Link:${selected.uri}`,
           reply_markup: JSON.stringify({
             inline_keyboard: [
               [
                 {
-                  text: "View Site",
-                  callback_data: "view_site",
-                },
-                {
                   text: "Save Item",
-                  callback_data: selected.image,
+                  callback_data: String(action),
                 },
               ],
             ],
