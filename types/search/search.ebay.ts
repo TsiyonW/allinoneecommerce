@@ -32,7 +32,7 @@ export const getDataFromEbay = async (
     for (let item of itemSummaries) {
       let itemDetails = {} as any;
       //   itemDetails.user_id = userId;
-      itemDetails.uri = item.itemHref;
+      itemDetails.uri = item.itemWebUrl2;
       itemDetails.site = "eBay";
       itemDetails.description = item.title;
       itemDetails.unitPrice = `${item.price.value} ${item.price.currency}`;
