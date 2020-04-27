@@ -13,13 +13,13 @@ const search = async (_: any, args: any, ctx: any) => {
     });
 
     // wait for the data to be returned with in specified time otherwise timeout
-    let amazonData: any = await getDataFromAmazon(args.item);
+    // let amazonData: any = await getDataFromAmazon(args.item);
     let ebayData: any = await getDataFromEbay(args.item);
 
     // push the results from each site to the results array
 
     loop(ebayData, searchResults);
-    loop(amazonData, searchResults);
+    // loop(amazonData, searchResults);
 
     // console.log(searchResults)
     return searchResults;
@@ -28,7 +28,7 @@ const search = async (_: any, args: any, ctx: any) => {
 function loop(data: any, target: any) {
     let i = 0;
     for (let item of data) {
-        while (i <= 5) {
+        while (i <= 10) {
             target.push(item);
             i++;
         }
