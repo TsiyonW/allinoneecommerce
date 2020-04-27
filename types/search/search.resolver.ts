@@ -9,7 +9,7 @@ const search = async(_:any, args:any,ctx:any)=>{
     let timeOut = new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve([{error:'Request time out.'}]);
-        }, 15000)
+        }, 20000)
     })
 
     // wait for the data to be returned with in specified time otherwise timeout
@@ -17,18 +17,21 @@ const search = async(_:any, args:any,ctx:any)=>{
     let ebayData : any = await getDataFromEbay(args.item) 
 
     // push the results from each site to the results array
-    for(let item in amazonData){
+    
 
-    }
-    loop(amazonData, searchResults);
     loop(ebayData, searchResults);
+    loop(amazonData, searchResults);
+    
 
-    console.log(searchResults)
+    // console.log(searchResults)
     return searchResults;
 }
 
 function loop(data: any, target:any){
     for(let i of data){
+        if(target.length == 5){
+            return;
+        }
         target.push(i);
     }
 

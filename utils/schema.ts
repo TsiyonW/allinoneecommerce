@@ -43,7 +43,7 @@ input newItemInput{
   }
   type Mutation{
     register(input:NewUserInput):User!
-    removeUser(chatId:String!):User
+    removeUser(id:ID!):User
     saveItem(chatId:String!,input:newItemInput!):SavedItem!,
     removeItem(chatId:String!,id:ID!):SavedItem!,
     emptySavedItem(chatId:String!):SavedItem!,

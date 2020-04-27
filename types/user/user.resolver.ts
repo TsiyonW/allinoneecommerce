@@ -23,7 +23,9 @@ const register = async(_:any, args:any,ctx:any)=>{
 
 // removes user
 const removeUser = async(_:any, args:any,ctx:any)=>{
-  return await UserDB.User.query().deleteById(args.id)
+ 
+  const user =  await UserDB.User.query().deleteById(args.chatId)
+  //  console.log(user)
 
 }
 export default {
