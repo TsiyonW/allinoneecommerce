@@ -6,7 +6,7 @@
   "repository": "https://github.com/TsiyonW/allinoneecommerce.git",
   "author": "Tsiyon & Oromia",
   "scripts": {
-    "start": "node './**/*.ts' --exec 'ts-node' ./app.ts"
+    "start": "tsc && node dist/app.js"
   },
   "license": "MIT",
   "dependencies": {
