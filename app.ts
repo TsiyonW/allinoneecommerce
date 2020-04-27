@@ -12,7 +12,7 @@ let bot = require("./utils/common");
 
 const app = express();
 app.use(bodyParser.json());
-//let bot = new BotService();
+
 
 (async () => {
   BotService.startBot();
@@ -28,9 +28,9 @@ app.use(bodyParser.json());
     console.log(`Server ready at http://localhost:8000${server.graphqlPath}`);
   });
 
-  // app.post('/' + bot.token, function (req, res) {
-  //  // console.log(bot.token)
-  //   bot.processUpdate(req.body);
-  //   res.sendStatus(200);
-  // });
+  app.post('/' + bot.token, function (req, res) {
+   // console.log(bot.token)
+    bot.processUpdate(req.body);
+    res.sendStatus(200);
+  });
 })();
