@@ -23,8 +23,8 @@ app.use(bodyParser.json());
   });
 
   server.applyMiddleware({ app });
-
-  app.listen({ port: 8000 }, function () {
+  const port = process.env.PORT || 3000
+  app.listen(port, function () {
     console.log(`Server ready at http://localhost:8000${server.graphqlPath}`);
   });
 

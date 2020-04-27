@@ -9,11 +9,9 @@ export const getDataFromEbay = async (
     //set client credentials
     const eBay = new Ebay({
       clientID:
-        process.env.EBAY_CLIENT_ID ||
-        "TsiyonWu-allinone-PRD-faa9faa19-a3438077",
+        process.env.EBAY_CLIENT_ID ,
       clientSecret:
-        process.env.EBAY_CLIENT_SECRET ||
-        "PRD-aa9faa190ccc-e39c-40d6-bc97-ff31",
+        process.env.EBAY_CLIENT_SECRET ,
       body: {
         grant_type: "client_credentials",
         scope: "https://api.ebay.com/oauth/api_scope",
