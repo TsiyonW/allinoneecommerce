@@ -2,7 +2,7 @@ const Ebay = require("ebay-node-api");
 
 export const getDataFromEbay = async (
   searchField: string,
-  limit: number = 5
+  limit: number = 6
 ) => {
   let data: string[] = [];
   try {

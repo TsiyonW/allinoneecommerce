@@ -5,7 +5,8 @@ import { getDataFromAmazon } from "./search.amazon";
 const search = async (_: any, args: any, ctx: any) => {
     let searchResults: any = [];
 
-    // timeout to be resolved after 10 seconds
+    // timeout to be resolved after 20 seconds so error will be returned from the race if 
+    // the sites took more than 20 seconds to resolve
     let timeOut = new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve([{ error: "Request time out." }]);
@@ -26,7 +27,7 @@ const search = async (_: any, args: any, ctx: any) => {
 };
 
 function loop(data: any, target: any) {
-    for(let i = 0;i<10; i++){
+    for(let i = 0;i<6; i++){
         target.push(data[i])
     }
 }
