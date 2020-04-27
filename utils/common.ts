@@ -23,7 +23,7 @@ export class BotService {
 
     if (process.env.NODE_ENV === "production") {
       bot = new TelegramBot(token);
-      bot.setWebHook("" + bot.token); //use webhooks in production
+      bot.setWebHook(process.env.HEROKU_URL + bot.token); //use webhooks in production
     } else {
       //otherwise use polling for faster experiance
       bot = new TelegramBot(token, { polling: true });
