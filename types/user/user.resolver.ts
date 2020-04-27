@@ -1,40 +1,35 @@
-import { UserDB } from '../../db/models/User';
+import { UserDB } from "../../db/models/User";
 
 //get all users
-const users = async(_:any, args:any,ctx:any)=>{
-    const users = await UserDB.User.query();
-    return users;
-}
+const users = async (_: any, args: any, ctx: any) => {
+  const users = await UserDB.User.query();
+  return users;
+};
 
 // get user by phone number
-const userBychatId = async(_:any, args:any,ctx:any)=>{
-  
-    const user = await UserDB.User.query().where('chatId','=',args.chatId);
-    
-    return user[0];
-}
+const userBychatId = async (_: any, args: any, ctx: any) => {
+  const user = await UserDB.User.query().where("chatId", "=", args.chatId);
+
+  return user[0];
+};
 
 // registers user
-const register = async(_:any, args:any,ctx:any)=>{
-  
-  return await  UserDB.User.query().insert({...args.input})
-
-}
+const register = async (_: any, args: any, ctx: any) => {
+  return await UserDB.User.query().insert({ ...args.input });
+};
 
 // removes user
-const removeUser = async(_:any, args:any,ctx:any)=>{
- 
-  const user =  await UserDB.User.query().deleteById(args.chatId)
+const removeUser = async (_: any, args: any, ctx: any) => {
+  const user = await UserDB.User.query().deleteById(args.chatId);
   //  console.log(user)
-
-}
+};
 export default {
-    Query: {
-      users,
-      userBychatId
-    },
-    Mutation: {
-      register,
-      removeUser
-    }
-}
+  Query: {
+    users,
+    userBychatId,
+  },
+  Mutation: {
+    register,
+    removeUser,
+  },
+};
