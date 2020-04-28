@@ -5,17 +5,14 @@ import users from "./types/user/user.resolver";
 import savedItem from "./types/saveditem/saveditem.resolver";
 import search from "./types/search/search.resolver";
 import { merge } from "lodash";
-import { BotService } from "./utils/common";
 require("dotenv").config();
 const bodyParser = require("body-parser");
-let bot = require("./utils/common");
 
 const app = express();
 app.use(bodyParser.json());
 
 
 (async () => {
-  BotService.startBot();
   const server = new ApolloServer({
     typeDefs: schemas,
     resolvers: merge({}, users, savedItem, search),
@@ -23,14 +20,10 @@ app.use(bodyParser.json());
   });
 
   server.applyMiddleware({ app });
-  const port = process.env.PORT || 3000
+  const port = process.env.PORT || 8000
+  
   app.listen(port, function () {
     console.log(`Server ready at http://localhost:8000${server.graphqlPath}`);
   });
 
-  app.post('/' + bot.token, function (req, res) {
-   // console.log(bot.token)
-    bot.processUpdate(req.body);
-    res.sendStatus(200);
-  });
 })();

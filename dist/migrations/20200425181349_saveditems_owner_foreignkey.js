@@ -1,11 +1,11 @@
 "use strict";
 exports.up = function (knex) {
     return knex.schema.table("saveditems", function (table) {
-        table.foreign("user_id").references("users.id");
+        table.foreign("chatId").references("users.chatId");
     });
 };
 exports.down = function (knex) {
     return knex.schema.table("saveditems", function (table) {
-        table.dropForeign("user_id");
+        table.dropForeign("chatId");
     });
 };

@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -47,59 +36,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var User_1 = require("../../db/models/User");
-//get all users
-var users = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var users;
+var search_ebay_1 = require("./search.ebay");
+//search
+var search = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
+    var searchResults, timeOut, ebayData;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query()];
+            case 0:
+                searchResults = [];
+                timeOut = new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve([{ error: "Request time out." }]);
+                    }, 20000);
+                });
+                return [4 /*yield*/, search_ebay_1.getDataFromEbay(args.item)];
             case 1:
-                users = _a.sent();
-                return [2 /*return*/, users];
+                ebayData = _a.sent();
+                // push the results from each site to the results array
+                loop(ebayData, searchResults);
+                // loop(amazonData, searchResults);
+                // console.log(searchResults)
+                return [2 /*return*/, searchResults];
         }
     });
 }); };
-// get user by phone number
-var userBychatId = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().where("chatId", "=", args.chatId)];
-            case 1:
-                user = _a.sent();
-                return [2 /*return*/, user[0]];
-        }
-    });
-}); };
-// registers user
-var register = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().insert(__assign({}, args.input))];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-// removes user
-var removeUser = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().deleteById(args.chatId)];
-            case 1:
-                user = _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); };
+function loop(data, target) {
+    for (var i = 0; i < 6; i++) {
+        target.push(data[i]);
+    }
+}
 exports.default = {
     Query: {
-        users: users,
-        userBychatId: userBychatId,
-    },
-    Mutation: {
-        register: register,
-        removeUser: removeUser,
+        search: search,
     },
 };

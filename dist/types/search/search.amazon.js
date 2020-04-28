@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -47,59 +36,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var User_1 = require("../../db/models/User");
-//get all users
-var users = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var users;
+var Nightmare = require("nightmare");
+var nightmare = Nightmare({ show: false });
+var cheerio = require("cheerio");
+exports.getDataFromAmazon = function (searchField) { return __awaiter(_this, void 0, void 0, function () {
+    var data, amazonURL, searchResult, $;
+    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query()];
+            case 0:
+                data = [];
+                amazonURL = "https://www.amazon.com";
+                return [4 /*yield*/, nightmare
+                        .goto(amazonURL)
+                        .type("#twotabsearchtextbox", searchField)
+                        .click("input.nav-input")
+                        .wait(".s-desktop-content")
+                        .evaluate(function () {
+                        var element = document.querySelector(".s-desktop-content");
+                        return element.innerHTML;
+                    })
+                        .end()];
             case 1:
-                users = _a.sent();
-                return [2 /*return*/, users];
+                searchResult = _a.sent();
+                $ = cheerio.load(searchResult);
+                $('div[data-component-type = "s-search-result"]').each(function (i, elem) { return __awaiter(_this, void 0, void 0, function () {
+                    var items, item, itemD;
+                    return __generator(this, function (_a) {
+                        items = $.html(elem);
+                        item = cheerio.load(items);
+                        itemD = {};
+                        // itemD.chatId = chatId;
+                        itemD.uri = amazonURL + item("h2 a.a-text-normal").get(0).attribs.href;
+                        itemD.site = "Amazon";
+                        itemD.description = item("a.a-text-normal span.a-text-normal")
+                            .text()
+                            .trim();
+                        itemD.unitPrice = item(".a-offscreen").text().trim();
+                        itemD.rating = item("i span.a-icon-alt").text().trim();
+                        itemD.image = item("img").get(0).attribs.src;
+                        itemD.item = searchField;
+                        data.push(itemD);
+                        return [2 /*return*/];
+                    });
+                }); });
+                // console.log(data)
+                return [2 /*return*/, data];
         }
     });
 }); };
-// get user by phone number
-var userBychatId = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().where("chatId", "=", args.chatId)];
-            case 1:
-                user = _a.sent();
-                return [2 /*return*/, user[0]];
-        }
-    });
-}); };
-// registers user
-var register = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().insert(__assign({}, args.input))];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-// removes user
-var removeUser = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.UserDB.User.query().deleteById(args.chatId)];
-            case 1:
-                user = _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); };
-exports.default = {
-    Query: {
-        users: users,
-        userBychatId: userBychatId,
-    },
-    Mutation: {
-        register: register,
-        removeUser: removeUser,
-    },
-};

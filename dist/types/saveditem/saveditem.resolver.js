@@ -11,11 +11,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -46,19 +45,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var SavedItem_1 = require("../../db/models/SavedItem");
 // return all the items saved by user
-exports.mySavedItems = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+exports.mySavedItems = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().where('user_id', '=', ctx.user.id)];
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().where("chatId", "=", args.chatId)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
 //get specific item in the saved using id
-exports.savedItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+exports.savedItem = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().findById(args.id)];
@@ -67,16 +67,16 @@ exports.savedItem = function (_, args, ctx) { return __awaiter(void 0, void 0, v
     });
 }); };
 // add item to saved items
-var saveItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+var saveItem = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().insert(__assign(__assign({}, args.input), { user_id: ctx.user.id }))];
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().insert(__assign({}, args.input))];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
 // removes item from the saved
-var removeItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+var removeItem = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().deleteById(args.id)];
@@ -85,10 +85,12 @@ var removeItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void
     });
 }); };
 // remove all saved items
-var emptySavedItem = function (_, args, ctx) { return __awaiter(void 0, void 0, void 0, function () {
+var emptySavedItem = function (_, args, ctx) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query().delete().where('user_id', '=', args.user_id)];
+            case 0: return [4 /*yield*/, SavedItem_1.SavedItemDB.SavedItem.query()
+                    .delete()
+                    .where("chatId", "=", args.chatId)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
@@ -96,11 +98,11 @@ var emptySavedItem = function (_, args, ctx) { return __awaiter(void 0, void 0, 
 exports.default = {
     Query: {
         mySavedItems: exports.mySavedItems,
-        savedItem: exports.savedItem
+        savedItem: exports.savedItem,
     },
     Mutation: {
         saveItem: saveItem,
         removeItem: removeItem,
         emptySavedItem: emptySavedItem,
-    }
+    },
 };

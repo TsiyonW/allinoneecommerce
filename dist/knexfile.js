@@ -9,16 +9,12 @@ module.exports = {
             database: 'allinone'
         },
         migrations: {
-            directory: __dirname + './migrations'
+            directory: __dirname + '/migrations'
         }
     },
     staging: {
         client: 'postgresql',
-        connection: {
-            database: 'my_db',
-            user: 'username',
-            password: 'password'
-        },
+        connection: 'postgres://jbaajoigvelsvh:ed528fe4a50a91e246c2f78c082cb92dfaa7e3422f58a73e3bbf590809e140e5@ec2-3-223-21-106.compute-1.amazonaws.com:5432/dbeu7afpjv78rr',
         pool: {
             min: 2,
             max: 10
@@ -29,11 +25,7 @@ module.exports = {
     },
     production: {
         client: 'postgresql',
-        connection: {
-            database: 'my_db',
-            user: 'username',
-            password: 'password'
-        },
+        connection: 'postgres://jbaajoigvelsvh:ed528fe4a50a91e246c2f78c082cb92dfaa7e3422f58a73e3bbf590809e140e5@ec2-3-223-21-106.compute-1.amazonaws.com:5432/dbeu7afpjv78rr',
         pool: {
             min: 2,
             max: 10

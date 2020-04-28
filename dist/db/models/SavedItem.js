@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Model = require('objection').Model;
+var Model = require("objection").Model;
 var knex = require("../config/knex");
 Model.knex(knex);
 var SavedItemDB;
@@ -25,23 +25,23 @@ var SavedItemDB;
         }
         Object.defineProperty(SavedItem, "tableName", {
             get: function () {
-                return 'saveditems';
+                return "saveditems";
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(SavedItem, "relationMappings", {
             get: function () {
-                var User = require('./User');
+                var User = require("./User");
                 return {
                     user: {
                         relation: Model.BelongsToOneRelation,
                         modelClass: User,
                         join: {
-                            from: 'saveditems.user_id',
-                            to: 'users.id'
-                        }
-                    }
+                            from: "saveditems.user_id",
+                            to: "users.id",
+                        },
+                    },
                 };
             },
             enumerable: true,
