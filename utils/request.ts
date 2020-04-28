@@ -6,7 +6,7 @@ const gql = require("graphql-tag");
 const fetch = require("node-fetch");
 
 const client = new ApolloClient({
-  link: createHttpLink({ uri: "https://allinonecommerce.herokuapp.com/graphql/", fetch }),
+  link: createHttpLink({ uri: "https://allinonecommerce.herokuapp.com/graphql", fetch }),
   cache: new InMemoryCache(),
 });
 
